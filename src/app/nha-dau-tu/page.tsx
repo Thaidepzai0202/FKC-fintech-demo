@@ -5,6 +5,7 @@ import { ChevronDown, FileText, Lock, AlertTriangle, MapPin } from 'lucide-react
 import { Navbar } from '@/features/landing/components/Navbar'
 import { Footer } from '@/features/landing/components/Footer'
 import { SectionLabel } from '@/features/landing/components/SectionLabel'
+import { ConsultationForm } from '@/features/landing/components/ConsultationForm'
 import { FAQS, CONTACT_INFO, COMPANY_INFO } from '@/features/landing/data'
 import { useInView } from '@/features/landing/hooks/useInView'
 
@@ -113,22 +114,7 @@ export default function NhaDauTuPage() {
                   </div>
                 </div>
               </div>
-              <form className="space-y-3" onSubmit={e => e.preventDefault()}>
-                <div className="grid grid-cols-2 gap-3">
-                  <input placeholder="Họ và tên"
-                    className="h-11 px-4 rounded-xl border border-slate-200 bg-white text-sm text-[#0F172A] placeholder-[#94A3B8] focus:outline-none focus:border-[#0AACB5] transition" />
-                  <input placeholder="Số điện thoại"
-                    className="h-11 px-4 rounded-xl border border-slate-200 bg-white text-sm text-[#0F172A] placeholder-[#94A3B8] focus:outline-none focus:border-[#0AACB5] transition" />
-                </div>
-                <input placeholder="Email"
-                  className="w-full h-11 px-4 rounded-xl border border-slate-200 bg-white text-sm text-[#0F172A] placeholder-[#94A3B8] focus:outline-none focus:border-[#0AACB5] transition" />
-                <textarea rows={4} placeholder="Nội dung tư vấn..."
-                  className="w-full px-4 py-3 rounded-xl border border-slate-200 bg-white text-sm text-[#0F172A] placeholder-[#94A3B8] focus:outline-none focus:border-[#0AACB5] transition resize-none" />
-                <button type="submit"
-                  className="w-full h-12 rounded-xl bg-gradient-to-r from-[#0891B2] to-[#10B981] text-white font-semibold hover:opacity-90 transition cursor-pointer">
-                  Gửi yêu cầu tư vấn →
-                </button>
-              </form>
+              <ConsultationForm source="nha-dau-tu" inputBg="bg-white" rows={4} />
             </div>
           </div>
         </div>

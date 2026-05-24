@@ -75,7 +75,7 @@ export const PRODUCTS = [
     color: '#6366F1',
     options: [
       'Công ty môi giới hàng hoá phái sinh qua đối tác ICT',
-      'Công ty môi giới chứng khoán, cổ phiếu qua VPBankS',
+      'Công ty môi giới chứng khoán, cổ phiếu qua VPBankS, DNSE, VPS',
     ],
   },
 ]
@@ -102,7 +102,7 @@ export const KNOWLEDGE = [
   {
     level: '01',
     title: 'Nhập môn đầu tư',
-    desc: 'Dành cho người bắt đầu: hiểu thị trường, chứng khoán, FX và crypto từ gốc.',
+    desc: 'Dành cho người bắt đầu: hiểu thị trường, chứng khoán cơ sở, chứng khoán phái sinh, hàng hoá phái sinh.',
     items: ['Chứng khoán là gì?', 'Cách đọc biểu đồ cơ bản', 'Đầu tư vs đầu cơ', 'Quản lý rủi ro'],
     count: 12,
     color: '#0AACB5',
@@ -111,7 +111,7 @@ export const KNOWLEDGE = [
     level: '02',
     title: 'Kiến thức thị trường',
     desc: 'Phân tích kỹ thuật, cơ bản và hiểu sâu từng thị trường.',
-    items: ['Phân tích kỹ thuật (MA, RSI)', 'Đọc báo cáo tài chính', 'Cơ chế thị trường FX', 'Blockchain & DeFi'],
+    items: ['Phân tích kỹ thuật (MA, RSI)', 'Đọc báo cáo tài chính', 'Cơ chế thị trường', 'Blockchain & DeFi'],
     count: 18,
     color: '#10B981',
   },
@@ -165,12 +165,16 @@ export const FLOATING_CONTACTS = [
     tooltip: 'Chat Zalo ngay',
     href: 'https://zalo.me/0000000000',
     color: '#0068FF',
+    groups: [
+      { label: 'Chứng khoán cơ sở', href: 'https://zalo.me/g/dyqjyl372' },
+      { label: 'Chứng khoán phái sinh', href: 'https://zalo.me/g/wwzeal367' },
+    ],
   },
   {
     id: 'facebook',
     label: 'Facebook',
-    tooltip: 'Nhắn Facebook',
-    href: 'https://m.me/lkcfintech',
+    tooltip: 'Facebook LKC Fintech',
+    href: 'https://www.facebook.com/share/1CktvB1Qqm/?mibextid=wwXIfr',
     color: '#1877F2',
   },
   {

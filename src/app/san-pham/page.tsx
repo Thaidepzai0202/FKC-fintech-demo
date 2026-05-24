@@ -103,13 +103,13 @@ export default function SanPhamPage() {
               style={{ background: 'linear-gradient(135deg, #059669 0%, #10B981 60%, #0FCA9A 100%)' }}>
               <div className="absolute -top-12 -right-12 w-48 h-48 rounded-full blur-3xl opacity-20 bg-white" />
               <span className="inline-block px-3 py-1 rounded-full bg-white/20 text-xs font-semibold mb-4">Sản phẩm mới</span>
-              <h3 className="text-2xl font-bold mb-1">LKC Crypto Spot</h3>
+              <h3 className="text-2xl font-bold mb-1">LKC Crypto</h3>
               <p className="text-white/80 text-sm mb-5">Đầu tư tài sản số an toàn & có chiến lược</p>
               <p className="text-white/90 text-sm leading-relaxed mb-6">
-                Quản lý danh mục tài sản số theo chiến lược Spot (không đòn bẩy), tập trung vào BTC, ETH và các layer-1 tiềm năng theo chu kỳ thị trường.
+                Quản lý danh mục tài sản số theo chiến lược, tập trung vào BTC, ETH và các layer-1 tiềm năng theo chu kỳ thị trường.
               </p>
               <ul className="space-y-2 mb-6">
-                {['Không đòn bẩy — kiểm soát rủi ro', 'Phân bổ danh mục khoa học', 'Báo cáo NAV định kỳ'].map(f => (
+                {['Kiểm soát rủi ro', 'Phân bổ danh mục khoa học', 'Báo cáo NAV định kỳ'].map(f => (
                   <li key={f} className="flex items-center gap-2 text-sm text-white/90">
                     <div className="w-1.5 h-1.5 rounded-full bg-white shrink-0" />
                     {f}
@@ -117,7 +117,7 @@ export default function SanPhamPage() {
                 ))}
               </ul>
               <button className="h-10 px-6 rounded-full bg-white text-[#059669] font-semibold text-sm hover:bg-white/90 transition flex items-center gap-2 cursor-pointer">
-                Tham gia Crypto Spot <ArrowRight size={14} />
+                Tham gia LKC Crypto <ArrowRight size={14} />
               </button>
             </div>
           </div>

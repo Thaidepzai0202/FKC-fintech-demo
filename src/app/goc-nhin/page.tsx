@@ -12,7 +12,6 @@ export default function GocNhinPage() {
   const filtered = ARTICLES.filter(a => a.tab === activeTab)
 
   const { ref: articlesRef, inView: articlesIn } = useInView()
-  const { ref: marketsRef, inView: marketsIn } = useInView()
 
   return (
     <div className="min-h-screen bg-[#F8FAFC]" style={{ fontFamily: "var(--font-ibm), 'IBM Plex Sans', system-ui, sans-serif" }}>
@@ -77,36 +76,6 @@ export default function GocNhinPage() {
             <button className="h-11 px-8 rounded-full border border-[#0AACB5] text-[#0891B2] font-medium hover:bg-[#0AACB5]/10 transition cursor-pointer">
               Xem tất cả phân tích →
             </button>
-          </div>
-        </div>
-      </section>
-
-      {/* MARKETS OVERVIEW */}
-      <section className="py-20 px-6 bg-slate-100">
-        <div ref={marketsRef} className="max-w-7xl mx-auto">
-          <div className={`text-center mb-14 transition-all duration-700 ease-out ${marketsIn ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-5'}`}>
-            <SectionLabel>3 thị trường</SectionLabel>
-            <h2 className="text-3xl font-bold text-[#0F172A]">Phạm vi phân tích</h2>
-          </div>
-          <div className="grid md:grid-cols-3 gap-6">
-            {[
-              { title: 'Chứng khoán Việt Nam', color: '#0AACB5', exchanges: ['HOSE', 'HNX', 'UPCOM'], desc: 'Phân tích kỹ thuật & cơ bản cổ phiếu niêm yết. Khuyến nghị mua/bán/nắm giữ hàng tuần.' },
-              { title: 'Ngoại hối (FX)', color: '#6366F1', exchanges: ['EUR/USD', 'GBP/USD', 'USD/JPY', 'Vàng'], desc: 'Phân tích xu hướng tỉ giá, điểm vào/ra tối ưu. Cập nhật sự kiện kinh tế vĩ mô toàn cầu.' },
-              { title: 'Tài sản số (Crypto)', color: '#10B981', exchanges: ['Bitcoin', 'Ethereum', 'Altcoin L1/L2'], desc: 'Theo dõi chu kỳ thị trường crypto, on-chain data và sentiment. Chiến lược DCA dài hạn.' },
-            ].map((m, i) => (
-              <div key={m.title}
-                style={{ transitionDelay: marketsIn ? `${i * 110}ms` : '0ms' }}
-                className={`p-6 rounded-2xl bg-white border border-slate-200 hover:shadow-md transition-all ${marketsIn ? 'opacity-100 translate-y-0 scale-100' : 'opacity-0 translate-y-6 scale-95'}`}>
-                <div className="w-3 h-3 rounded-full mb-4" style={{ background: m.color }} />
-                <h3 className="text-lg font-bold mb-2 text-[#0F172A]">{m.title}</h3>
-                <p className="text-sm text-[#475569] leading-relaxed mb-4">{m.desc}</p>
-                <div className="flex flex-wrap gap-2">
-                  {m.exchanges.map(e => (
-                    <span key={e} className="text-xs px-2.5 py-1 rounded-full border text-[#334155]" style={{ borderColor: `${m.color}50`, background: `${m.color}08` }}>{e}</span>
-                  ))}
-                </div>
-              </div>
-            ))}
           </div>
         </div>
       </section>

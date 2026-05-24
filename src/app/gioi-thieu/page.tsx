@@ -1,22 +1,22 @@
 'use client'
 
 import {
-  Phone, Mail, MapPin, ArrowRight,
+  Phone, Mail, MapPin,
   Target, Shield, TrendingUp,
-  Globe, Coins, PieChart,
-  CheckCircle2, Award, Users, Building2,
+  Cpu, GraduationCap, Sparkles,
+  Rocket, Compass,
+  CheckCircle2, Award, Users, Layers,
 } from 'lucide-react'
-import Link from 'next/link'
 import { Navbar } from '@/features/landing/components/Navbar'
 import { Footer } from '@/features/landing/components/Footer'
 import { SectionLabel } from '@/features/landing/components/SectionLabel'
-import { ABOUT_CARDS } from '@/features/landing/data'
+import { ConsultationForm } from '@/features/landing/components/ConsultationForm'
 import { useInView } from '@/features/landing/hooks/useInView'
 
 export default function GioiThieuPage() {
+  const { ref: scopeRef, inView: scopeIn } = useInView()
   const { ref: missionRef, inView: missionIn } = useInView()
   const { ref: valuesRef, inView: valuesIn } = useInView()
-  const { ref: marketsRef, inView: marketsIn } = useInView()
   const { ref: contactRef, inView: contactIn } = useInView()
 
   return (
@@ -37,21 +37,21 @@ export default function GioiThieuPage() {
           <div className="max-w-3xl">
             <div className="lkc-a1"><SectionLabel>Về LKC Fintech</SectionLabel></div>
             <h1 className="lkc-a2 text-4xl md:text-6xl font-bold text-white leading-tight mb-6 tracking-tight">
-              Đồng hành trên<br />
+              Đối tác tài chính<br />
               <span className="bg-gradient-to-r from-[#0AACB5] to-[#10B981] bg-clip-text text-transparent">
-                mọi hành trình đầu tư
+                tin cậy và hiệu quả
               </span>
             </h1>
             <p className="lkc-a3 text-white/70 text-lg leading-relaxed mb-10 max-w-2xl">
-              Công ty TNHH Đầu tư LKC Fintech — đơn vị tư vấn và ủy thác đầu tư đa tài sản với hơn 10 năm kinh nghiệm trên thị trường Việt Nam.
+              Công ty TNHH Đầu tư LKC Fintech — kết hợp tri thức tài chính và công nghệ hiện đại để tạo ra giải pháp đầu tư thông minh, bền vững và hiệu quả.
             </p>
 
             <div className="lkc-a4 grid grid-cols-2 md:grid-cols-4 gap-4">
               {[
                 { Icon: Award, value: '10+', label: 'Năm kinh nghiệm' },
                 { Icon: Users, value: '1,000+', label: 'Nhà đầu tư' },
-                { Icon: Globe, value: '3', label: 'Thị trường' },
-                { Icon: Building2, value: '95%', label: 'Tỉ lệ hài lòng' },
+                { Icon: Layers, value: '4', label: 'Lĩnh vực hoạt động' },
+                { Icon: CheckCircle2, value: '95%', label: 'Tỉ lệ hài lòng' },
               ].map(s => (
                 <div key={s.label} className="p-4 rounded-2xl bg-white/5 border border-white/10 text-center">
                   <s.Icon size={18} className="text-[#0AACB5] mx-auto mb-2" />
@@ -64,68 +64,132 @@ export default function GioiThieuPage() {
         </div>
       </section>
 
-      {/* ── MISSION & VISION ──────────────────────────────────────────── */}
+      {/* ── LĨNH VỰC HOẠT ĐỘNG ────────────────────────────────────────── */}
       <section className="py-20 px-6">
+        <div ref={scopeRef} className="max-w-7xl mx-auto">
+          <div className={`text-center mb-14 transition-all duration-700 ease-out ${scopeIn ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-5'}`}>
+            <SectionLabel>Lĩnh vực hoạt động</SectionLabel>
+            <h2 className="text-4xl font-bold text-[#0F172A]">Hệ sinh thái Fintech toàn diện</h2>
+            <p className="mt-3 text-[#475569] max-w-2xl mx-auto">
+              Từ giao dịch trực tiếp đến công nghệ định lượng, dịch vụ chuyên sâu và giải pháp tài chính số — đồng hành với nhà đầu tư trên toàn bộ hành trình.
+            </p>
+          </div>
+          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+            {[
+              {
+                Icon: TrendingUp, color: '#0AACB5',
+                title: 'Giao dịch tài chính',
+                desc: 'Hoạt động giao dịch chuyên sâu trên hai thị trường trọng điểm: Tài sản số và Chứng khoán.',
+                tags: ['Tài sản số', 'Chứng khoán'],
+              },
+              {
+                Icon: Cpu, color: '#6366F1',
+                title: 'Công nghệ giao dịch',
+                desc: 'Nghiên cứu, phát triển và triển khai hệ thống giao dịch định lượng, chỉ báo kỹ thuật và thuật toán AI.',
+                tags: ['Định lượng', 'Chỉ báo', 'AI'],
+              },
+              {
+                Icon: GraduationCap, color: '#10B981',
+                title: 'Dịch vụ đầu tư',
+                desc: 'Cung cấp tín hiệu, cho thuê hệ thống giao dịch, tư vấn và đào tạo giao dịch chuyên sâu cho nhà đầu tư.',
+                tags: ['Tín hiệu', 'Hệ thống', 'Đào tạo'],
+              },
+              {
+                Icon: Sparkles, color: '#D4A843',
+                title: 'Giải pháp Fintech',
+                desc: 'Ứng dụng công nghệ vào quản lý vốn, tối ưu hoá lợi nhuận và tự động hóa hoạt động đầu tư.',
+                tags: ['Quản lý vốn', 'Tối ưu', 'Tự động hoá'],
+              },
+            ].map((m, i) => (
+              <div key={m.title}
+                style={{ transitionDelay: scopeIn ? `${i * 110}ms` : '0ms' }}
+                className={`p-6 rounded-2xl bg-white border border-slate-200 hover:border-[#0AACB5]/40 hover:shadow-md transition-all group ${scopeIn ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-6'}`}>
+                <div className="w-12 h-12 rounded-xl flex items-center justify-center mb-4" style={{ background: `${m.color}15` }}>
+                  <m.Icon size={24} style={{ color: m.color }} />
+                </div>
+                <h3 className="font-bold text-[#0F172A] mb-2 group-hover:text-[#0AACB5] transition-colors">{m.title}</h3>
+                <p className="text-sm text-[#475569] leading-relaxed mb-4">{m.desc}</p>
+                <div className="flex flex-wrap gap-2">
+                  {m.tags.map(t => (
+                    <span key={t} className="text-xs px-2.5 py-1 rounded-full border border-slate-200 text-[#475569] bg-slate-50">{t}</span>
+                  ))}
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* ── MISSION & VISION ──────────────────────────────────────────── */}
+      <section className="py-20 px-6 bg-slate-100">
         <div ref={missionRef} className="max-w-7xl mx-auto">
-          <div className="grid md:grid-cols-2 gap-16 items-start">
-            <div className={`transition-all duration-700 ease-out ${missionIn ? 'opacity-100 translate-x-0' : 'opacity-0 -translate-x-8'}`}>
-              <SectionLabel>Sứ mệnh & Tầm nhìn</SectionLabel>
-              <h2 className="text-4xl font-bold mb-6 leading-tight text-[#0F172A]">
-                Không chỉ quản lý tiền —<br />
-                <span className="bg-gradient-to-r from-[#0891B2] to-[#10B981] bg-clip-text text-transparent">
-                  Kiến tạo tương lai tài chính
-                </span>
-              </h2>
-              <p className="text-[#334155] text-lg leading-relaxed mb-5">
-                LKC Fintech là công ty dịch vụ tài chính công nghệ chuyên cung cấp giải pháp đầu tư đa tài sản tại Việt Nam, với đội ngũ chuyên gia am hiểu sâu ba thị trường: chứng khoán, ngoại hối (FX) và tài sản số (Crypto).
-              </p>
-              <p className="text-[#334155] leading-relaxed mb-8">
-                Tầm nhìn của chúng tôi: xây dựng hệ sinh thái đầu tư{' '}
-                <strong className="text-[#0AACB5]">minh bạch, dễ tiếp cận và hiệu quả</strong> — nơi mọi nhà đầu tư đều tìm được giải pháp phù hợp với mục tiêu tài chính của mình.
-              </p>
-              <div className="space-y-3">
-                {[
-                  'Tư vấn cá nhân hóa theo mục tiêu và khẩu vị rủi ro',
-                  'Báo cáo hiệu suất minh bạch, định kỳ hàng tháng',
-                  'Đội ngũ chuyên gia với hơn 10 năm kinh nghiệm thực chiến',
-                  'Tuân thủ đầy đủ quy định pháp luật Việt Nam',
-                ].map(item => (
-                  <div key={item} className="flex items-start gap-3">
-                    <CheckCircle2 size={16} className="text-[#10B981] shrink-0 mt-0.5" />
-                    <span className="text-sm text-[#334155]">{item}</span>
-                  </div>
-                ))}
+          <div className={`text-center mb-14 transition-all duration-700 ease-out ${missionIn ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-5'}`}>
+            <SectionLabel>Sứ mệnh &amp; Tầm nhìn</SectionLabel>
+            <h2 className="text-4xl font-bold text-[#0F172A]">Kim chỉ nam của LKC Fintech</h2>
+          </div>
+
+          <div className="grid md:grid-cols-2 gap-6">
+            {/* Sứ mệnh */}
+            <div
+              className={`relative overflow-hidden p-10 rounded-3xl bg-white border border-slate-200 shadow-sm transition-all duration-700 ease-out ${missionIn ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-6'}`}>
+              <div className="absolute -top-16 -right-16 w-56 h-56 rounded-full blur-3xl opacity-30"
+                style={{ background: 'radial-gradient(circle, #0AACB5, transparent)' }} />
+              <div className="relative">
+                <div className="w-12 h-12 rounded-2xl flex items-center justify-center mb-5 bg-[#0AACB5]/12">
+                  <Rocket size={22} className="text-[#0AACB5]" />
+                </div>
+                <div className="text-xs font-semibold uppercase tracking-[0.18em] text-[#0AACB5] mb-3">Sứ mệnh</div>
+                <p className="text-xl md:text-2xl font-semibold text-[#0F172A] leading-snug">
+                  &ldquo;Kết hợp tri thức tài chính và công nghệ hiện đại để tạo ra giải pháp đầu tư{' '}
+                  <span className="bg-gradient-to-r from-[#0891B2] to-[#10B981] bg-clip-text text-transparent">
+                    thông minh, bền vững và hiệu quả
+                  </span>
+                  .&rdquo;
+                </p>
               </div>
             </div>
 
-            <div className={`grid grid-cols-2 gap-4 transition-all duration-700 ease-out delay-150 ${missionIn ? 'opacity-100 translate-x-0' : 'opacity-0 translate-x-8'}`}>
-              {ABOUT_CARDS.map(c => (
-                <div key={c.label}
-                  className="p-5 rounded-2xl border border-slate-200 bg-white hover:border-[#0AACB5]/50 hover:shadow-md transition-all cursor-pointer group">
-                  <div className="w-10 h-10 rounded-xl flex items-center justify-center mb-3" style={{ background: `${c.color}18` }}>
-                    <c.icon size={20} style={{ color: c.color }} />
-                  </div>
-                  <div className="font-semibold text-sm mb-1 text-[#0F172A] group-hover:text-[#0AACB5] transition-colors">{c.label}</div>
-                  <div className="text-xs text-[#64748B]">{c.desc}</div>
+            {/* Tầm nhìn */}
+            <div
+              style={{ transitionDelay: missionIn ? '120ms' : '0ms' }}
+              className={`relative overflow-hidden p-10 rounded-3xl bg-[#0A1628] text-white shadow-sm transition-all duration-700 ease-out ${missionIn ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-6'}`}>
+              <div className="absolute -bottom-16 -left-16 w-56 h-56 rounded-full blur-3xl opacity-30"
+                style={{ background: 'radial-gradient(circle, #10B981, transparent)' }} />
+              <div className="relative">
+                <div className="w-12 h-12 rounded-2xl flex items-center justify-center mb-5 bg-white/10">
+                  <Compass size={22} className="text-[#10B981]" />
                 </div>
-              ))}
-              <div className="col-span-2 p-5 rounded-2xl border border-[#0AACB5]/30 bg-gradient-to-br from-[#EFF6FF] to-[#F0FDFA] flex items-center justify-between">
-                <div>
-                  <div className="font-semibold text-sm text-[#0F172A] mb-0.5">Sẵn sàng bắt đầu?</div>
-                  <div className="text-xs text-[#475569]">Liên hệ tư vấn miễn phí ngay hôm nay</div>
-                </div>
-                <Link href="/nha-dau-tu"
-                  className="shrink-0 h-9 px-4 rounded-full bg-[#0AACB5] text-white text-xs font-semibold hover:bg-[#0891B2] transition flex items-center gap-1.5 cursor-pointer">
-                  Liên hệ <ArrowRight size={13} />
-                </Link>
+                <div className="text-xs font-semibold uppercase tracking-[0.18em] text-[#10B981] mb-3">Tầm nhìn</div>
+                <p className="text-xl md:text-2xl font-semibold leading-snug">
+                  Trở thành doanh nghiệp Fintech{' '}
+                  <span className="bg-gradient-to-r from-[#0AACB5] to-[#10B981] bg-clip-text text-transparent">
+                    hàng đầu Việt Nam
+                  </span>
+                  , tiên phong trong lĩnh vực giao dịch định lượng và trí tuệ nhân tạo tài chính, vươn ra thị trường quốc tế.
+                </p>
               </div>
             </div>
+          </div>
+
+          {/* Cam kết đi kèm */}
+          <div className={`mt-10 grid md:grid-cols-2 gap-3 transition-all duration-700 ease-out delay-200 ${missionIn ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-5'}`}>
+            {[
+              'Tư vấn cá nhân hóa theo mục tiêu và khẩu vị rủi ro',
+              'Báo cáo hiệu suất minh bạch, định kỳ hàng tháng',
+              'Đội ngũ chuyên gia với hơn 10 năm kinh nghiệm thực chiến',
+              'Tuân thủ đầy đủ quy định pháp luật Việt Nam',
+            ].map(item => (
+              <div key={item} className="flex items-start gap-3 p-4 rounded-xl bg-white border border-slate-200">
+                <CheckCircle2 size={16} className="text-[#10B981] shrink-0 mt-0.5" />
+                <span className="text-sm text-[#334155]">{item}</span>
+              </div>
+            ))}
           </div>
         </div>
       </section>
 
       {/* ── CORE VALUES ───────────────────────────────────────────────── */}
-      <section className="py-20 px-6 bg-slate-100">
+      <section className="py-20 px-6">
         <div ref={valuesRef} className="max-w-7xl mx-auto">
           <div className={`text-center mb-14 transition-all duration-700 ease-out ${valuesIn ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-5'}`}>
             <SectionLabel>Giá trị cốt lõi</SectionLabel>
@@ -180,53 +244,6 @@ export default function GioiThieuPage() {
         </div>
       </section>
 
-      {/* ── MARKETS ───────────────────────────────────────────────────── */}
-      <section className="py-20 px-6">
-        <div ref={marketsRef} className="max-w-7xl mx-auto">
-          <div className={`text-center mb-14 transition-all duration-700 ease-out ${marketsIn ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-5'}`}>
-            <SectionLabel>Thị trường hoạt động</SectionLabel>
-            <h2 className="text-4xl font-bold text-[#0F172A]">Chuyên sâu trên 3 thị trường</h2>
-          </div>
-          <div className="grid md:grid-cols-3 gap-6">
-            {[
-              {
-                Icon: TrendingUp, color: '#0AACB5',
-                title: 'Chứng khoán Việt Nam',
-                desc: 'Phân tích và đầu tư cổ phiếu tại các sàn HOSE, HNX, UPCOM. Tập trung vào blue-chip, tăng trưởng và cổ tức bền vững.',
-                tags: ['HOSE', 'HNX', 'UPCOM', 'ETF'],
-              },
-              {
-                Icon: Globe, color: '#6366F1',
-                title: 'Ngoại hối (FX)',
-                desc: 'Giao dịch các cặp tiền tệ chính và vàng. Phân tích kỹ thuật và cơ bản kết hợp, bám sát sự kiện kinh tế vĩ mô toàn cầu.',
-                tags: ['EUR/USD', 'GBP/USD', 'Vàng', 'Hàng hóa'],
-              },
-              {
-                Icon: Coins, color: '#10B981',
-                title: 'Tài sản số (Crypto)',
-                desc: 'Đầu tư tài sản số theo chiến lược Spot không đòn bẩy. Tập trung BTC, ETH và các layer-1 tiềm năng theo chu kỳ thị trường.',
-                tags: ['Bitcoin', 'Ethereum', 'Layer-1', 'DCA'],
-              },
-            ].map((m, i) => (
-              <div key={m.title}
-                style={{ transitionDelay: marketsIn ? `${i * 110}ms` : '0ms' }}
-                className={`p-6 rounded-2xl bg-white border border-slate-200 hover:border-[#0AACB5]/40 hover:shadow-md transition-all group ${marketsIn ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-6'}`}>
-                <div className="w-12 h-12 rounded-xl flex items-center justify-center mb-4" style={{ background: `${m.color}15` }}>
-                  <m.Icon size={24} style={{ color: m.color }} />
-                </div>
-                <h3 className="font-bold text-[#0F172A] mb-2 group-hover:text-[#0AACB5] transition-colors">{m.title}</h3>
-                <p className="text-sm text-[#475569] leading-relaxed mb-4">{m.desc}</p>
-                <div className="flex flex-wrap gap-2">
-                  {m.tags.map(t => (
-                    <span key={t} className="text-xs px-2.5 py-1 rounded-full border border-slate-200 text-[#475569] bg-slate-50">{t}</span>
-                  ))}
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
       {/* ── CONTACT ───────────────────────────────────────────────────── */}
       <section className="py-20 px-6 bg-slate-100">
         <div ref={contactRef} className="max-w-7xl mx-auto">
@@ -258,22 +275,7 @@ export default function GioiThieuPage() {
 
             <div className={`p-8 rounded-2xl bg-white border border-slate-200 shadow-sm transition-all duration-700 ease-out delay-150 ${contactIn ? 'opacity-100 translate-x-0' : 'opacity-0 translate-x-8'}`}>
               <h3 className="text-lg font-bold text-[#0F172A] mb-6">Đặt lịch tư vấn</h3>
-              <form className="space-y-3" onSubmit={e => e.preventDefault()}>
-                <div className="grid grid-cols-2 gap-3">
-                  <input placeholder="Họ và tên"
-                    className="h-11 px-4 rounded-xl border border-slate-200 bg-[#F8FAFC] text-sm text-[#0F172A] placeholder-[#94A3B8] focus:outline-none focus:border-[#0AACB5] transition" />
-                  <input placeholder="Số điện thoại"
-                    className="h-11 px-4 rounded-xl border border-slate-200 bg-[#F8FAFC] text-sm text-[#0F172A] placeholder-[#94A3B8] focus:outline-none focus:border-[#0AACB5] transition" />
-                </div>
-                <input placeholder="Email"
-                  className="w-full h-11 px-4 rounded-xl border border-slate-200 bg-[#F8FAFC] text-sm text-[#0F172A] placeholder-[#94A3B8] focus:outline-none focus:border-[#0AACB5] transition" />
-                <textarea rows={3} placeholder="Bạn muốn tư vấn về..."
-                  className="w-full px-4 py-3 rounded-xl border border-slate-200 bg-[#F8FAFC] text-sm text-[#0F172A] placeholder-[#94A3B8] focus:outline-none focus:border-[#0AACB5] transition resize-none" />
-                <button type="submit"
-                  className="w-full h-12 rounded-xl bg-gradient-to-r from-[#0891B2] to-[#10B981] text-white font-semibold hover:opacity-90 transition cursor-pointer">
-                  Gửi yêu cầu tư vấn →
-                </button>
-              </form>
+              <ConsultationForm source="gioi-thieu" inputBg="bg-[#F8FAFC]" rows={3} />
             </div>
           </div>
         </div>

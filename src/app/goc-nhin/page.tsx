@@ -5,8 +5,8 @@ import { SectionLabel } from '@/features/landing/components/SectionLabel'
 import { FeaturedVideo } from '@/features/landing/components/FeaturedVideo'
 import { fetchNews, fetchFeaturedVideo } from '@/features/landing/gocnhin'
 
-// Lấy dữ liệu mới từ Google Sheets, cache lại tối đa 60s.
-export const revalidate = 60
+// Lấy dữ liệu mới từ Google Sheets, cache lại tối đa 10s.
+export const revalidate = 10
 
 export default async function GocNhinPage() {
   const [video, news] = await Promise.all([fetchFeaturedVideo(), fetchNews()])

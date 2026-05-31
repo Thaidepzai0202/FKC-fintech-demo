@@ -24,3 +24,10 @@ services:
         sync: false
       - key: RESEND_FROM
         sync: false
+      # Google Sheets — dữ liệu trang Góc nhìn thị trường (sheet công khai, không phải bí mật)
+      - key: GOOGLE_SHEET_ID
+        value: 1_cPgwf2e7ChPpl8azuNh2K1ki-oBp98Nwd2jqfpRHqY
+      - key: GOOGLE_SHEET_NEWS_TAB
+        value: News
+      - key: GOOGLE_SHEET_VIDEOS_TAB
+        value: Videos

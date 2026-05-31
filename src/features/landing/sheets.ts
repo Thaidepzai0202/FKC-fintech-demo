@@ -33,7 +33,7 @@ export async function fetchSheetRows(tab: string): Promise<SheetRow[]> {
     `?tqx=out:json&headers=1&sheet=${encodeURIComponent(tab)}`
 
   try {
-    const res = await fetch(url, { next: { revalidate: 60 } })
+    const res = await fetch(url, { next: { revalidate: 10 } })
     if (!res.ok) return []
 
     const raw = await res.text()

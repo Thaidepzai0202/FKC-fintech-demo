@@ -1,20 +1,18 @@
-'use client'
-
-import { useState } from 'react'
+import { ArrowUpRight } from 'lucide-react'
 import { Navbar } from '@/features/landing/components/Navbar'
 import { Footer } from '@/features/landing/components/Footer'
 import { SectionLabel } from '@/features/landing/components/SectionLabel'
-import { ARTICLES, MARKET_TABS } from '@/features/landing/data'
-import { useInView } from '@/features/landing/hooks/useInView'
+import { FeaturedVideo } from '@/features/landing/components/FeaturedVideo'
+import { fetchNews, fetchFeaturedVideo } from '@/features/landing/gocnhin'
 
-export default function GocNhinPage() {
-  const [activeTab, setActiveTab] = useState('Hàng ngày')
-  const filtered = ARTICLES.filter(a => a.tab === activeTab)
+// Lấy dữ liệu mới từ Google Sheets, cache lại tối đa 60s.
+export const revalidate = 60
 
-  const { ref: articlesRef, inView: articlesIn } = useInView()
+export default async function GocNhinPage() {
+  const [video, news] = await Promise.all([fetchFeaturedVideo(), fetchNews()])
 
   return (
-    <div className="min-h-screen bg-[#F8FAFC]" style={{ fontFamily: "var(--font-ibm), 'IBM Plex Sans', system-ui, sans-serif" }}>
+    <div className="min-h-screen bg-[#F8FAFC]" style={{ fontFamily: "var(--font-inter), 'Inter', system-ui, sans-serif" }}>
       <Navbar />
 
       {/* PAGE HEADER */}
@@ -23,59 +21,59 @@ export default function GocNhinPage() {
           <div className="lkc-a1"><SectionLabel>Phân tích chuyên sâu</SectionLabel></div>
           <h1 className="lkc-a2 text-4xl md:text-5xl font-bold text-[#0F172A]">Góc nhìn thị trường</h1>
           <p className="lkc-a3 mt-4 text-[#475569] max-w-lg mx-auto text-lg leading-relaxed">
-            Phân tích từ đội ngũ chuyên gia LKC — cập nhật đều đặn hàng ngày, tuần, tháng và quý
+            Phân tích từ đội ngũ chuyên gia LKC — cập nhật trực tiếp qua video và bản tin thị trường
           </p>
         </div>
       </section>
 
-      {/* MARKET VIEW */}
-      <section className="py-20 px-6">
-        <div ref={articlesRef} className="max-w-7xl mx-auto">
-          <div className={`flex flex-col md:flex-row md:items-end justify-between mb-10 gap-6 transition-all duration-700 ease-out ${articlesIn ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-5'}`}>
-            <div>
-              <SectionLabel>Góc nhìn thị trường</SectionLabel>
-              <h2 className="text-3xl font-bold text-[#0F172A]">Phân tích từ chuyên gia LKC</h2>
-              <p className="mt-2 text-[#475569]">Cập nhật đều đặn — Hàng ngày · Tuần · Tháng · Quý</p>
-            </div>
-            <div className="flex flex-wrap gap-2">
-              {MARKET_TABS.map(tab => (
-                <button key={tab} onClick={() => setActiveTab(tab)}
-                  className={`px-4 py-2 rounded-full text-sm font-medium transition-all cursor-pointer ${
-                    activeTab === tab
-                      ? 'bg-[#0AACB5] text-white shadow-sm'
-                      : 'bg-white border border-slate-200 text-[#334155] hover:border-[#0AACB5]/50 hover:text-[#0AACB5]'
-                  }`}>
-                  {tab}
-                </button>
-              ))}
+      {/* VIDEO + NEWS */}
+      <section className="py-16 px-6">
+        <div className="max-w-7xl mx-auto grid lg:grid-cols-12 gap-8">
+          {/* Video nổi bật */}
+          <div className={video ? 'lg:col-span-7' : 'hidden'}>
+            <SectionLabel>Trực tiếp / Video nổi bật</SectionLabel>
+            <div className="mt-4">
+              {video && <FeaturedVideo video={video} />}
             </div>
           </div>
 
-          <div className="grid md:grid-cols-2 gap-5">
-            {(filtered.length ? filtered : ARTICLES.slice(0, 2)).map((article, i) => (
-              <div key={article.id}
-                style={{ transitionDelay: articlesIn ? `${i * 80}ms` : '0ms' }}
-                className={`p-6 rounded-2xl bg-white border border-slate-200 hover:border-[#0AACB5]/40 hover:shadow-md transition-all group cursor-pointer ${articlesIn ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-5'}`}>
-                <div className="flex items-center gap-2 mb-4 flex-wrap">
-                  <span className="px-2.5 py-1 rounded-full text-xs font-semibold text-white" style={{ background: article.marketColor }}>
-                    {article.market}
-                  </span>
-                  <span className="px-2.5 py-1 rounded-full text-xs font-medium bg-slate-100 text-[#475569]">{article.tab}</span>
-                  <span className="ml-auto text-xs text-[#64748B]">{article.date}</span>
-                </div>
-                <h3 className="font-semibold text-[#0F172A] leading-snug group-hover:text-[#0891B2] transition-colors mb-3">{article.title}</h3>
-                <div className="flex items-center gap-2 text-xs text-[#64748B]">
-                  <div className="w-5 h-5 rounded-full bg-gradient-to-r from-[#0891B2] to-[#10B981] shrink-0" />
-                  LKC Research
-                </div>
+          {/* Bản tin chính */}
+          <div className={video ? 'lg:col-span-5' : 'lg:col-span-12'}>
+            <SectionLabel>Bản tin thị trường</SectionLabel>
+
+            {news.length === 0 ? (
+              <p className="mt-4 text-[#64748B]">Chưa có bản tin nào.</p>
+            ) : (
+              <div className={`mt-4 ${video ? 'flex flex-col gap-3 lg:max-h-[520px] lg:overflow-y-auto lg:pr-1' : 'grid md:grid-cols-2 gap-4'}`}>
+                {news.map(item => {
+                  const inner = (
+                    <>
+                      <div className="flex items-start gap-3">
+                        <h3 className="flex-1 font-semibold leading-snug text-[#0F172A] group-hover:text-[#0891B2] transition-colors">
+                          {item.title}
+                        </h3>
+                        {item.link && (
+                          <ArrowUpRight className="h-4 w-4 shrink-0 text-[#94A3B8] group-hover:text-[#0AACB5] transition-colors" />
+                        )}
+                      </div>
+                      {item.subtitle && (
+                        <p className="mt-1.5 text-sm leading-relaxed text-[#64748B] line-clamp-3">{item.subtitle}</p>
+                      )}
+                    </>
+                  )
+
+                  const cls = 'block p-4 rounded-xl bg-white border border-slate-200 hover:border-[#0AACB5]/40 hover:shadow-md transition-all group'
+
+                  return item.link ? (
+                    <a key={item.id} href={item.link} target="_blank" rel="noopener noreferrer" className={`${cls} cursor-pointer`}>
+                      {inner}
+                    </a>
+                  ) : (
+                    <div key={item.id} className={cls}>{inner}</div>
+                  )
+                })}
               </div>
-            ))}
-          </div>
-
-          <div className="mt-8 text-center">
-            <button className="h-11 px-8 rounded-full border border-[#0AACB5] text-[#0891B2] font-medium hover:bg-[#0AACB5]/10 transition cursor-pointer">
-              Xem tất cả phân tích →
-            </button>
+            )}
           </div>
         </div>
       </section>

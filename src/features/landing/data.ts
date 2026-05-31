@@ -87,7 +87,17 @@ export const ABOUT_CARDS = [
   { icon: PieChart, label: 'Đa tài sản', desc: 'Danh mục cân bằng', color: '#D4A843' },
 ]
 
-export const ARTICLES = [
+export type Article = {
+  id: number
+  tab: string
+  title: string
+  date: string
+  market: string
+  marketColor: string
+  link?: string
+}
+
+export const ARTICLES: Article[] = [
   { id: 1, tab: 'Hàng ngày', title: 'Bản tin thị trường sáng 18/05 — Điểm nhấn cần theo dõi', date: '18/05/2026', market: 'Chứng khoán', marketColor: '#0AACB5' },
   { id: 2, tab: 'Hàng ngày', title: 'Crypto Daily: BTC giữ vùng hỗ trợ 95K, ETH tăng nhẹ', date: '18/05/2026', market: 'Crypto', marketColor: '#10B981' },
   { id: 3, tab: 'Hàng tuần', title: 'Nhìn lại tuần 20/2026 — Cơ hội và rủi ro tuần tới', date: '16/05/2026', market: 'Chứng khoán', marketColor: '#0AACB5' },
@@ -134,6 +144,37 @@ export const FAQS = [
   { q: 'Làm thế nào để bắt đầu đầu tư với LKC Fintech?', a: 'Liên hệ tư vấn → Tham vấn mục tiêu → Ký hợp đồng → Chuyển vốn và bắt đầu. Toàn bộ quy trình diễn ra trong 1–2 ngày làm việc.' },
   { q: 'LKC Fintech bảo mật thông tin khách hàng như thế nào?', a: 'Thông tin khách hàng được mã hóa và bảo mật theo tiêu chuẩn quốc tế. Chúng tôi cam kết không chia sẻ dữ liệu cá nhân cho bên thứ ba khi chưa có sự đồng ý của khách hàng.' },
   { q: 'Báo cáo hiệu suất được gửi cho tôi như thế nào?', a: 'Báo cáo hiệu suất được gửi qua email và Zalo/Telegram vào cuối mỗi tháng, hoặc theo yêu cầu. Dashboard theo dõi trực tuyến đang phát triển và sẽ ra mắt trong 2026.' },
+]
+
+// Các kênh chính thức khách hàng có thể kết nối / theo dõi
+export const CONTACT_CHANNELS = [
+  {
+    id: 'zalo',
+    label: 'Zalo',
+    desc: 'Tham gia nhóm tư vấn để nhận khuyến nghị & hỗ trợ nhanh nhất.',
+    cta: 'Tham gia nhóm Zalo',
+    color: '#0068FF',
+    groups: [
+      { label: 'Chứng khoán cơ sở', href: 'https://zalo.me/g/dyqjyl372' },
+      { label: 'Chứng khoán phái sinh', href: 'https://zalo.me/g/wwzeal367' },
+    ],
+  },
+  {
+    id: 'facebook',
+    label: 'Facebook',
+    desc: 'Theo dõi fanpage để cập nhật góc nhìn thị trường mỗi ngày.',
+    cta: 'Theo dõi Facebook',
+    color: '#1877F2',
+    href: 'https://www.facebook.com/share/1CktvB1Qqm/?mibextid=wwXIfr',
+  },
+  {
+    id: 'tiktok',
+    label: 'TikTok',
+    desc: 'Xem video kiến thức đầu tư & phân tích thị trường ngắn gọn.',
+    cta: 'Xem trên TikTok',
+    color: '#010101',
+    href: 'https://www.tiktok.com/@lkcfintech',
+  },
 ]
 
 export const SOCIAL_LINKS = [

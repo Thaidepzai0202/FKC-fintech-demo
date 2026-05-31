@@ -12,7 +12,7 @@ export default function KienThucPage() {
   const { ref: ctaRef, inView: ctaIn } = useInView()
 
   return (
-    <div className="min-h-screen bg-[#F8FAFC]" style={{ fontFamily: "var(--font-ibm), 'IBM Plex Sans', system-ui, sans-serif" }}>
+    <div className="min-h-screen bg-[#F8FAFC]" style={{ fontFamily: "var(--font-inter), 'Inter', system-ui, sans-serif" }}>
       <Navbar />
 
       {/* PAGE HEADER */}

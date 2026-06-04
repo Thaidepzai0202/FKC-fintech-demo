@@ -1,0 +1,68 @@
+name: Deploy to cPanel
+
+# Tự động build + đẩy lên VinaHost cPanel mỗi khi có code mới trên nhánh main.
+on:
+  push:
+    branches: [main]
+  workflow_dispatch: {} # cho phép bấm chạy tay trong tab Actions
+
+# Không cho 2 lần deploy chạy chồng nhau; lần mới hủy lần cũ đang chạy.
+concurrency:
+  group: deploy-cpanel
+  cancel-in-progress: true
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout source
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js 22
+        uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Build (standalone)
+        env:
+          NEXT_TELEMETRY_DISABLED: "1"
+          # Sheet công khai — set ở build để trang Góc nhìn prerender đúng dữ liệu.
+          GOOGLE_SHEET_ID: 1_cPgwf2e7ChPpl8azuNh2K1ki-oBp98Nwd2jqfpRHqY
+          GOOGLE_SHEET_NEWS_TAB: News
+          GOOGLE_SHEET_VIDEOS_TAB: Videos
+        run: npm run build
+
+      - name: Assemble standalone bundle
+        run: |
+          set -e
+          # Next standalone không tự copy static/public — phải gộp vào.
+          cp -r .next/static .next/standalone/.next/static
+          cp -r public .next/standalone/public
+          # Gỡ sharp (file nhị phân theo OS) — đã tắt tối ưu ảnh nên không cần.
+          rm -rf .next/standalone/node_modules/sharp .next/standalone/node_modules/@img
+          # Không đẩy .env (biến môi trường set trong cPanel).
+          rm -f .next/standalone/.env
+          # Đổi tmp/restart.txt mỗi lần deploy -> Passenger tự khởi động lại.
+          mkdir -p .next/standalone/tmp
+          echo "deployed $GITHUB_SHA at $(date -u +%FT%TZ)" > .next/standalone/tmp/restart.txt
+
+      - name: Deploy to cPanel via FTPS
+        uses: SamKirkland/FTP-Deploy-Action@v4.3.5
+        with:
+          server: ${{ secrets.FTP_SERVER }}
+          username: ${{ secrets.FTP_USERNAME }}
+          password: ${{ secrets.FTP_PASSWORD }}
+          protocol: ftps
+          port: 21
+          # Nội dung thư mục standalone đổ thẳng vào app root trên server.
+          local-dir: ./.next/standalone/
+          server-dir: ${{ secrets.FTP_REMOTE_DIR }}
+          # Chỉ upload file đã đổi (so với lần trước, lưu state trên server).
+          # Giữ lại stderr.log và file cPanel tạo, không xóa bừa.
+          exclude: |
+            **/stderr.log
+            **/.htaccess

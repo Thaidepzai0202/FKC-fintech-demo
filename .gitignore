@@ -20,6 +20,9 @@
 # production
 /build
 
+# cPanel deploy artifact
+/cpanel-deploy.zip
+
 # misc
 .DS_Store
 *.pem

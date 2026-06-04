@@ -50,19 +50,31 @@ jobs:
           mkdir -p .next/standalone/tmp
           echo "deployed $GITHUB_SHA at $(date -u +%FT%TZ)" > .next/standalone/tmp/restart.txt
 
-      - name: Deploy to cPanel via FTPS
-        uses: SamKirkland/FTP-Deploy-Action@v4.3.5
-        with:
-          server: ${{ secrets.FTP_SERVER }}
-          username: ${{ secrets.FTP_USERNAME }}
-          password: ${{ secrets.FTP_PASSWORD }}
-          protocol: ftps
-          port: 21
-          # Nội dung thư mục standalone đổ thẳng vào app root trên server.
-          local-dir: ./.next/standalone/
-          server-dir: ${{ secrets.FTP_REMOTE_DIR }}
-          # Chỉ upload file đã đổi (so với lần trước, lưu state trên server).
-          # Giữ lại stderr.log và file cPanel tạo, không xóa bừa.
-          exclude: |
-            **/stderr.log
-            **/.htaccess
+      - name: Deploy to cPanel via FTPS (lftp, auto-reconnect)
+        env:
+          FTP_SERVER: ${{ secrets.FTP_SERVER }}
+          FTP_USERNAME: ${{ secrets.FTP_USERNAME }}
+          FTP_PASSWORD: ${{ secrets.FTP_PASSWORD }}
+        run: |
+          set -e
+          sudo apt-get update -qq && sudo apt-get install -y -qq lftp
+          # lftp: tự reconnect khi server ngắt (FIN packet), so sánh theo size
+          # nên bỏ qua file đã upload -> tiếp tục từ chỗ dở, không làm lại từ đầu.
+          # Account FTP đã giới hạn trong thư mục app -> upload thẳng vào "./".
+          lftp -u "$FTP_USERNAME","$FTP_PASSWORD" "ftp://$FTP_SERVER" -e "
+            set ftp:ssl-force true;
+            set ftp:ssl-protect-data true;
+            set ssl:verify-certificate no;
+            set net:max-retries 10;
+            set net:persist-retries 10;
+            set net:timeout 20;
+            set net:reconnect-interval-base 5;
+            set ftp:use-mlsd true;
+            set mirror:parallel-transfer-count 2;
+            set cmd:fail-exit true;
+            mirror -R --ignore-time --no-perms --no-symlinks .next/standalone/ ./;
+            mkdir -f tmp;
+            put .next/standalone/tmp/restart.txt -o tmp/restart.txt;
+            put .next/standalone/server.js -o server.js;
+            bye
+          "

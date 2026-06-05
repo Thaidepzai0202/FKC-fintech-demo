@@ -22,7 +22,7 @@ export default function SanPhamPage() {
           <div className="lkc-a1"><SectionLabel>Sản phẩm & Dịch vụ</SectionLabel></div>
           <h1 className="lkc-a2 text-4xl md:text-5xl font-bold text-[#0F172A]">Giải pháp đầu tư toàn diện</h1>
           <p className="lkc-a3 mt-4 text-[#475569] max-w-lg mx-auto text-lg leading-relaxed">
-            Từ tư vấn đến ủy thác — LKC Fintech đồng hành cùng bạn trên mọi hành trình đầu tư
+            Từ tư vấn đến quản lý danh mục — LKC Fintech đồng hành cùng bạn trên mọi hành trình đầu tư
           </p>
         </div>
       </section>
@@ -71,7 +71,7 @@ export default function SanPhamPage() {
         <div ref={flagshipRef} className="max-w-7xl mx-auto">
           <div className={`text-center mb-14 transition-all duration-700 ease-out ${flagshipIn ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-5'}`}>
             <SectionLabel>Sản phẩm nổi bật</SectionLabel>
-            <h2 className="text-3xl font-bold text-[#0F172A]">Danh mục ủy thác đầu tư</h2>
+            <h2 className="text-3xl font-bold text-[#0F172A]">Danh mục đầu tư</h2>
             <p className="mt-3 text-[#475569]">Giao vốn — chuyên gia quản lý — bạn nhận lợi nhuận</p>
           </div>
           <div className="grid md:grid-cols-2 gap-6">

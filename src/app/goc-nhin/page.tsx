@@ -4,6 +4,14 @@ import { Footer } from '@/features/landing/components/Footer'
 import { SectionLabel } from '@/features/landing/components/SectionLabel'
 import { FeaturedVideo } from '@/features/landing/components/FeaturedVideo'
 import { fetchNews, fetchFeaturedVideo } from '@/features/landing/gocnhin'
+import type { Metadata } from 'next'
+
+export const metadata: Metadata = {
+  title: 'Góc nhìn thị trường',
+  description:
+    'Phân tích thị trường, tin tức và video chuyên sâu về chứng khoán, FX và Crypto từ đội ngũ LKC Fintech.',
+  alternates: { canonical: '/goc-nhin' },
+}
 
 // Lấy dữ liệu mới từ Google Sheets, cache lại tối đa 10s.
 export const revalidate = 10

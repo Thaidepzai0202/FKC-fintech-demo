@@ -25,10 +25,10 @@ export const SLIDES = [
     orb2: '#0AACB5',
   },
   {
-    badge: 'Ủy thác đầu tư · LKC Stock · LKC Crypto Spot',
-    headline: ['ỦY THÁC VỐN —', 'CHUYÊN GIA LÀM VIỆC'],
-    sub: 'Hai danh mục ủy thác uy tín: LKC Stock (chứng khoán cơ sở) và LKC Crypto Spot (tài sản số). Báo cáo định kỳ, không ẩn phí.',
-    cta: 'Tìm hiểu ủy thác',
+    badge: 'Quản lý danh mục · LKC Stock · LKC Crypto Spot',
+    headline: ['GIAO VỐN —', 'CHUYÊN GIA LÀM VIỆC'],
+    sub: 'Hai danh mục được quản lý chuyên nghiệp: LKC Stock (chứng khoán cơ sở) và LKC Crypto Spot (tài sản số). Báo cáo định kỳ, không ẩn phí.',
+    cta: 'Tìm hiểu ngay',
     cta2: 'Xem hiệu suất',
     orb1: '#10B981',
     orb2: '#0FCA9A',
@@ -137,9 +137,9 @@ export const KNOWLEDGE = [
 
 export const FAQS = [
   { q: 'LKC Fintech có được cấp phép hoạt động không?', a: 'Có. Công ty TNHH Đầu tư LKC Fintech hoạt động theo Giấy chứng nhận đăng ký kinh doanh do Sở KH&ĐT TP. Hà Nội cấp. Mọi hoạt động tuân thủ đầy đủ quy định pháp luật Việt Nam.' },
-  { q: 'Vốn tối thiểu để tham gia ủy thác đầu tư là bao nhiêu?', a: 'Vốn tối thiểu phụ thuộc vào từng sản phẩm. Vui lòng liên hệ đội ngũ tư vấn để được tư vấn chi tiết và phù hợp với mục tiêu đầu tư của bạn.' },
+  { q: 'Vốn tối thiểu để tham gia là bao nhiêu?', a: 'Vốn tối thiểu phụ thuộc vào từng sản phẩm. Vui lòng liên hệ đội ngũ tư vấn để được tư vấn chi tiết và phù hợp với mục tiêu đầu tư của bạn.' },
   { q: 'Phí quản lý được tính như thế nào?', a: 'LKC Fintech áp dụng phí quản lý cố định hàng năm + phí hiệu suất tính trên lợi nhuận vượt benchmark. Chi tiết phí được công bố minh bạch trong hợp đồng dịch vụ.' },
-  { q: 'Tôi có thể rút vốn bất cứ lúc nào không?', a: 'Các sản phẩm ủy thác có thời hạn cam kết tối thiểu (thường 3–6 tháng) để đảm bảo hiệu quả chiến lược đầu tư. Chi tiết sẽ được thỏa thuận rõ trong hợp đồng.' },
+  { q: 'Tôi có thể rút vốn bất cứ lúc nào không?', a: 'Các sản phẩm có thời hạn cam kết tối thiểu (thường 3–6 tháng) để đảm bảo hiệu quả chiến lược đầu tư. Chi tiết sẽ được thỏa thuận rõ trong hợp đồng.' },
   { q: 'LKC Crypto Spot có rủi ro gì?', a: 'Tài sản số có biến động giá cao. LKC Crypto Spot chỉ dùng chiến lược Spot (không đòn bẩy) để kiểm soát rủi ro. Nhà đầu tư cần hiểu rõ rủi ro trước khi tham gia.' },
   { q: 'Làm thế nào để bắt đầu đầu tư với LKC Fintech?', a: 'Liên hệ tư vấn → Tham vấn mục tiêu → Ký hợp đồng → Chuyển vốn và bắt đầu. Toàn bộ quy trình diễn ra trong 1–2 ngày làm việc.' },
   { q: 'LKC Fintech bảo mật thông tin khách hàng như thế nào?', a: 'Thông tin khách hàng được mã hóa và bảo mật theo tiêu chuẩn quốc tế. Chúng tôi cam kết không chia sẻ dữ liệu cá nhân cho bên thứ ba khi chưa có sự đồng ý của khách hàng.' },

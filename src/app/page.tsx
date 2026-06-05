@@ -58,9 +58,9 @@ export default function HomePage() {
                       <div className="w-1.5 h-1.5 rounded-full bg-[#0AACB5] animate-pulse" />
                       <span className="text-[#0AACB5] text-xs font-medium tracking-wider uppercase">{s.badge}</span>
                     </div>
-                    <h1 className={`text-4xl md:text-6xl font-bold text-white leading-tight mb-6 tracking-tight ${i === 0 ? 'lkc-a2' : ''}`}>
+                    <h1 className={`text-4xl md:text-6xl font-bold text-white leading-[1.3] mb-6 tracking-tight ${i === 0 ? 'lkc-a2' : ''}`}>
                       {s.headline[0]}<br />
-                      <span className="bg-gradient-to-r from-[#0AACB5] to-[#10B981] bg-clip-text text-transparent">{s.headline[1]}</span>
+                      <span className="bg-gradient-to-r from-[#0AACB5] to-[#10B981] bg-clip-text text-transparent pt-[0.15em] inline-block">{s.headline[1]}</span>
                     </h1>
                     <p className={`text-white/75 text-lg leading-relaxed mb-8 max-w-xl ${i === 0 ? 'lkc-a3' : ''}`}>{s.sub}</p>
                     <div className={`flex flex-wrap gap-4 ${i === 0 ? 'lkc-a4' : ''}`}>
@@ -131,7 +131,7 @@ export default function HomePage() {
           <div className="grid grid-cols-2 md:grid-cols-5 gap-4">
             {[
               { label: 'Giới thiệu', href: '/gioi-thieu', desc: 'Về LKC Fintech', color: '#0AACB5' },
-              { label: 'Sản phẩm', href: '/san-pham', desc: 'Tư vấn & ủy thác', color: '#10B981' },
+              { label: 'Sản phẩm', href: '/san-pham', desc: 'Tư vấn & quản lý danh mục', color: '#10B981' },
               { label: 'Góc nhìn TT', href: '/goc-nhin', desc: 'Phân tích thị trường', color: '#6366F1' },
               { label: 'Kiến thức', href: '/kien-thuc', desc: 'Học đầu tư cùng LKC', color: '#D4A843' },
               { label: 'Nhà đầu tư', href: '/nha-dau-tu', desc: 'FAQ & liên hệ', color: '#EC4899' },

@@ -11,7 +11,7 @@ export function Footer() {
           <div>
             <Logo />
             <p className="mt-4 text-sm text-[#94A3B8] leading-relaxed">
-              Giải pháp tài chính toàn diện: tư vấn đầu tư, ủy thác đầu tư chứng khoán, FX và Crypto tại Việt Nam.
+              Giải pháp tài chính toàn diện: tư vấn đầu tư, quản lý danh mục chứng khoán, FX và Crypto tại Việt Nam.
             </p>
             <p className="mt-4 text-xs text-[#64748B] italic leading-relaxed">
               Đầu tư có rủi ro. Hiệu suất quá khứ không đảm bảo kết quả tương lai.
@@ -34,7 +34,7 @@ export function Footer() {
           <div>
             <h4 className="font-semibold mb-4 text-white text-sm uppercase tracking-wider">Sản phẩm</h4>
             <ul className="space-y-2.5">
-              {['Tư vấn đầu tư', 'Ủy thác đầu tư', 'Môi giới đầu tư', 'LKC Stock', 'LKC Crypto Spot'].map(i => (
+              {['Tư vấn đầu tư', 'Quản lý danh mục', 'Môi giới đầu tư', 'LKC Stock', 'LKC Crypto Spot'].map(i => (
                 <li key={i}>
                   <Link href="/san-pham" className="text-sm text-[#94A3B8] hover:text-[#0AACB5] transition-colors cursor-pointer">
                     {i}

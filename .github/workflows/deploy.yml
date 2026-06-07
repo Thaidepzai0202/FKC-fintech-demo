@@ -42,6 +42,32 @@ jobs:
           # Next standalone không tự copy static/public — phải gộp vào.
           cp -r .next/static .next/standalone/.next/static
           cp -r public .next/standalone/public
+          # Next standalone đôi khi KHÔNG trace được thư viện chỉ dùng trong Server
+          # Action (vd `resend`). Tự tính cây phụ thuộc và copy đủ vào standalone.
+          node -e '
+            const fs=require("fs"),path=require("path");
+            const root="node_modules", dest=".next/standalone/node_modules";
+            const ENSURE=["resend"];
+            const seen=new Set();
+            function walk(name){
+              if(seen.has(name))return;
+              const dir=path.join(root,name);
+              if(!fs.existsSync(path.join(dir,"package.json")))return;
+              seen.add(name);
+              let pkg={};try{pkg=JSON.parse(fs.readFileSync(path.join(dir,"package.json")))}catch{}
+              for(const d of Object.keys(pkg.dependencies||{}))walk(d);
+            }
+            ENSURE.forEach(walk);
+            let n=0;
+            for(const name of seen){
+              const from=path.join(root,name),to=path.join(dest,name);
+              if(fs.existsSync(to))continue;
+              fs.mkdirSync(path.dirname(to),{recursive:true});
+              fs.cpSync(from,to,{recursive:true});
+              n++;
+            }
+            console.log("Ensured "+n+" server-action deps in standalone:",[...seen].join(", "));
+          '
           # Gỡ sharp (file nhị phân theo OS) — đã tắt tối ưu ảnh nên không cần.
           rm -rf .next/standalone/node_modules/sharp .next/standalone/node_modules/@img
           # Không đẩy .env (biến môi trường set trong cPanel).

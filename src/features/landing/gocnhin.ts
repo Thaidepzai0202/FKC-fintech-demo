@@ -7,7 +7,8 @@ import { fetchSheetRows } from './sheets'
  *  Tab "Videos": cột  type  | url      | title
  *                type = "live"  → tự động phát (mute theo policy trình duyệt)
  *                type = "video" → hiện thumbnail, bấm mới phát
- *                Lấy DÒNG ĐẦU TIÊN làm video nổi bật.
+ *                Mỗi dòng là 1 video trong playlist; video live đầu tiên
+ *                (nếu có) được chọn phát mặc định, không thì dòng đầu.
  */
 
 const NEWS_TAB = process.env.GOOGLE_SHEET_NEWS_TAB ?? 'News'
@@ -57,14 +58,14 @@ export function extractYouTubeId(input: string): string {
   return ''
 }
 
-export async function fetchFeaturedVideo(): Promise<FeaturedVideo | null> {
+export async function fetchVideos(): Promise<FeaturedVideo[]> {
   const rows = await fetchSheetRows(VIDEOS_TAB)
-  const first = rows.find(r => r.url || r.link)
-  if (!first) return null
-
-  const videoId = extractYouTubeId(first.url || first.link || '')
-  if (!videoId) return null
-
-  const type = (first.type || '').toLowerCase() === 'live' ? 'live' : 'video'
-  return { type, videoId, title: first.title || undefined }
+  return rows
+    .map(r => {
+      const videoId = extractYouTubeId(r.url || r.link || '')
+      if (!videoId) return null
+      const type = (r.type || '').toLowerCase() === 'live' ? 'live' : 'video'
+      return { type, videoId, title: r.title || undefined } as FeaturedVideo
+    })
+    .filter((v): v is FeaturedVideo => v !== null)
 }

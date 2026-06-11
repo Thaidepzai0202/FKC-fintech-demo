@@ -3,7 +3,7 @@ import { Navbar } from '@/features/landing/components/Navbar'
 import { Footer } from '@/features/landing/components/Footer'
 import { SectionLabel } from '@/features/landing/components/SectionLabel'
 import { FeaturedVideo } from '@/features/landing/components/FeaturedVideo'
-import { fetchNews, fetchFeaturedVideo } from '@/features/landing/gocnhin'
+import { fetchNews, fetchVideos } from '@/features/landing/gocnhin'
 import type { Metadata } from 'next'
 
 export const metadata: Metadata = {
@@ -17,7 +17,8 @@ export const metadata: Metadata = {
 export const revalidate = 10
 
 export default async function GocNhinPage() {
-  const [video, news] = await Promise.all([fetchFeaturedVideo(), fetchNews()])
+  const [videos, news] = await Promise.all([fetchVideos(), fetchNews()])
+  const hasVideo = videos.length > 0
 
   return (
     <div className="min-h-screen bg-[#F8FAFC]" style={{ fontFamily: "var(--font-inter), 'Inter', system-ui, sans-serif" }}>
@@ -38,21 +39,21 @@ export default async function GocNhinPage() {
       <section className="py-16 px-6">
         <div className="max-w-7xl mx-auto grid lg:grid-cols-12 gap-8">
           {/* Video nổi bật */}
-          <div className={video ? 'lg:col-span-7' : 'hidden'}>
+          <div className={hasVideo ? 'lg:col-span-7' : 'hidden'}>
             <SectionLabel>Trực tiếp / Video nổi bật</SectionLabel>
             <div className="mt-4">
-              {video && <FeaturedVideo video={video} />}
+              {hasVideo && <FeaturedVideo videos={videos} />}
             </div>
           </div>
 
           {/* Bản tin chính */}
-          <div className={video ? 'lg:col-span-5' : 'lg:col-span-12'}>
+          <div className={hasVideo ? 'lg:col-span-5' : 'lg:col-span-12'}>
             <SectionLabel>Bản tin thị trường</SectionLabel>
 
             {news.length === 0 ? (
               <p className="mt-4 text-[#64748B]">Chưa có bản tin nào.</p>
             ) : (
-              <div className={`mt-4 ${video ? 'flex flex-col gap-3 lg:max-h-[520px] lg:overflow-y-auto lg:pr-1' : 'grid md:grid-cols-2 gap-4'}`}>
+              <div className={`mt-4 ${hasVideo ? 'flex flex-col gap-3 lg:max-h-[640px] lg:overflow-y-auto lg:pr-1' : 'grid md:grid-cols-2 gap-4'}`}>
                 {news.map(item => {
                   const inner = (
                     <>
